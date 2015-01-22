@@ -1,13 +1,11 @@
 package tnm
 
 import sbt._, Keys._
+import sbtrelease.ReleasePlugin.ReleaseKeys._
 
+object AppPlugin extends AutoPlugin {
 
-object AppBuild extends AutoPlugin {
-
-  override def requires = BasicBuild
-
-  object autoImport
+  override def requires = BasicPlugin
 
   private lazy val compilerSettings = Seq(
     publishArtifact in (Compile, packageDoc) := false,
@@ -15,6 +13,12 @@ object AppBuild extends AutoPlugin {
     crossPaths := false
   )
 
+  private lazy val releaseSettings = Seq(
+    crossBuild := false
+  )
+
   override lazy val projectSettings =
-    compilerSettings
+    compilerSettings ++
+    releaseSettings
+
 }

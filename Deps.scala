@@ -39,7 +39,8 @@ object Deps {
     val util = spray("util")
     val servlet = spray("servlet")
     val can = spray("can")
-    val ext  = "com.thenewmotion" %% "spray-ext" % "0.1.8"
+    val json = "io.spray" %% "spray-json" % "1.3.1"
+    val ext = "com.thenewmotion" %% "spray-ext" % "0.1.8"
   }
 
   object atmosphere {
@@ -48,6 +49,4 @@ object Deps {
   }
 
   val dispatch = "net.databinder.dispatch" %% "dispatch-core" % "0.11.0"
-
-
 }

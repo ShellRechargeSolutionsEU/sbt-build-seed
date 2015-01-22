@@ -3,13 +3,13 @@ package tnm
 import sbt._, Keys._
 
 
-object BasicBuild extends AutoPlugin {
+object BasicPlugin extends AutoPlugin {
 
-  private val shellSettings = Seq(
+  val shellSettings = Seq(
     shellPrompt := Shell.prompt
   )
 
-  private val compilerSettings = Seq(
+  val compilerSettings = Seq(
     scalaVersion := ScalaVersion.curr,
     resolvers := Seq(Repo.TnmGeneral),
     scalacOptions := Seq(
@@ -17,21 +17,21 @@ object BasicBuild extends AutoPlugin {
       "-unchecked",
       "-deprecation",
       "-feature",
-      "-Xlog-reflective-calls"
+      "-Xlog-reflective-calls",
+      "-Xlint"
     ),
     parallelExecution in Compile := true,
     fork in Test := true
   )
 
-  val tnmDefaultPublishSettings =
-    Repo.publishSettings(Repo.Private)
-
-  val allBasicSettings =
-    shellSettings ++
-    compilerSettings ++
-    tnmDefaultPublishSettings
+  val publishSettings =
+    Repo.publishSettings(Repo.Private) ++
+    sbtrelease.ReleasePlugin.releaseSettings ++
+    aether.Aether.aetherPublishSettings
 
   override lazy val projectSettings =
-    allBasicSettings
+    shellSettings ++
+    compilerSettings ++
+    publishSettings
 
 }
