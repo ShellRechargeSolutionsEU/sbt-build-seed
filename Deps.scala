@@ -16,6 +16,8 @@ object Deps {
   val specs2 = "org.specs2" %% "specs2" % "2.3.13"
   val specs2x = "ua.t3hnar.specs2x" %% "specs2x" % "1.2"
 
+
+
   object akka {
     val version = "2.3.6"
 
@@ -39,14 +41,8 @@ object Deps {
     val util = spray("util")
     val servlet = spray("servlet")
     val can = spray("can")
-    val json = "io.spray" %% "spray-json" % "1.3.1"
+    val json = spray("json")
     val ext = "com.thenewmotion" %% "spray-ext" % "0.1.8"
   }
 
-  object atmosphere {
-    val runtime = "org.atmosphere" % "atmosphere-runtime" % "2.1.4"
-    val tomcat = "org.atmosphere" % "atmosphere-compat-tomcat7" % "2.0.1"
-  }
-
-  val dispatch = "net.databinder.dispatch" %% "dispatch-core" % "0.11.0"
 }

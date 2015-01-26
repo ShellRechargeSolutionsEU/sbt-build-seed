@@ -14,7 +14,9 @@ object AppPlugin extends AutoPlugin {
   )
 
   private lazy val releaseSettings = Seq(
-    crossBuild := false
+    crossBuild := false,
+    publishArtifact in (Compile, packageDoc) := false,
+    publishArtifact in (Compile, packageSrc) := false
   )
 
   override lazy val projectSettings =

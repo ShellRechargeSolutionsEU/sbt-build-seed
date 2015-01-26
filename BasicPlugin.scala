@@ -17,8 +17,7 @@ object BasicPlugin extends AutoPlugin {
       "-unchecked",
       "-deprecation",
       "-feature",
-      "-Xlog-reflective-calls",
-      "-Xlint"
+      "-Xlog-reflective-calls"
     ),
     parallelExecution in Compile := true,
     fork in Test := true
