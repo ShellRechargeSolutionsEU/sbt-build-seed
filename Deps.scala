@@ -1,12 +1,18 @@
 package tnm
 
-import sbt._
+import sbt._, Keys._
 
 object Deps {
-  private def inConf(configurations: String, ids: Seq[ModuleID]): Seq[ModuleID] =
-    ids.map(_ % configurations)
+  implicit class PimpedProject(val p: Project) extends AnyVal {
+    def dependsOn(file: File) =
+      p.dependsOn(file.getAbsoluteFile.toURI)
 
-  def providedDeps(ds: ModuleID*) = inConf("provided", ds)
-  def runtimeDeps(ds: ModuleID*) = inConf("runtime", ds)
-  def testDeps(ds: ModuleID*) = inConf("test", ds)
+    def dependsOn(ds: ModuleID*) =
+      p.settings(
+        libraryDependencies ++= ds)
+
+    def dependsOn(scope: String, ds: ModuleID*) =
+      p.settings(
+        libraryDependencies ++= ds.map(_ % scope))
+  }
 }
