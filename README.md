@@ -14,18 +14,25 @@ resolvers += "TNM" at "http://nexus.thenewmotion.com/content/repositories/releas
 addSbtPlugin("com.thenewmotion" % "sbt-build-seed" % "0.1.0" )
 ```
 
-Then in your build file of choice
+For library use:
 ```
-val myModule = (project in file("my-module"))
-  .enablePlugins(AppBuild)
+val libModule = project.in(file("lib-module"))
+  .enablePlugins(LibPlugin)
 ```
-or
+
+For OSS library use:
 ```
-val myModule = (project in file("my-module"))
-  .enablePlugins(LibBuild)
+val ossLibModule = project.in(file("oss-lib-module"))
+  .enablePlugins(OssLibPlugin)
 ```
-or
+
+However, application settings appliance has one caveat atm. 
+You must explicitly set publish settings as in following snippet
 ```
-val myModule = (project in file("my-module"))
-  .enablePlugins(OssLibBuild)
+val appModule = project.in(file("app-module"))
+  .enablePlugins(AppPlugin)
+  .settings(AppPlugin.publishSettings: _*)
 ```
+
+### Maintainer ###
+m.fedorov@thenewmotion.com

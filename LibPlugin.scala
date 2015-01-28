@@ -16,6 +16,7 @@ object LibPlugin extends AutoPlugin {
   )
 
   override lazy val projectSettings =
+    BasicPlugin.projectSettings ++
     compilerSettings ++
     releaseSettings
 }

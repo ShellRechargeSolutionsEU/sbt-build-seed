@@ -4,15 +4,22 @@ import sbt._, Keys._
 
 
 sealed trait Repo {
-  def snapshots = "snapshots"
-  def releases = "releases"
-  def url(isSnapshot: Boolean) =
-    s"${Repo.base}/repositories/"+(if (isSnapshot) snapshots else releases)
+  def snapshots: String
+  def releases: String
+  def url(isSnapshot: Boolean) = {
+    val target = if (isSnapshot) snapshots else releases
+    s"${Repo.base}/repositories/$target"
+  }
 }
 
 object Repo {
   private val base = "http://nexus.thenewmotion.com/content"
-  object Private extends Repo
+
+  object Private extends Repo {
+    override val snapshots = "snapshots"
+    override val releases = "releases"
+  }
+
   object Public extends Repo {
     override val snapshots = "snapshots-public"
     override val releases = "releases-public"
@@ -22,7 +29,7 @@ object Repo {
 
   def publishSettings(repo: Repo) = Seq(
     publishMavenStyle := true,
-    credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
+    credentials := Seq(Credentials(Path.userHome / ".ivy2" / ".credentials")),
     publishTo := Some("tnm-publish-to" at repo.url(isSnapshot.value))
   )
 
