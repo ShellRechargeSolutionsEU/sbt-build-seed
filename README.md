@@ -1,9 +1,10 @@
 # SBT Build Seed #
 
 Adds default settings for 3 kinds of builds
-* Internal Library 
-* OSS Library
-* Application
+
+- Internal Library 
+- OSS Library
+- Application
 
 ### How to use it in build? ###
 
