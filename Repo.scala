@@ -25,7 +25,8 @@ object Repo {
     override val releases = "releases-public"
   }
 
-  val TnmGeneral = "TNM" at s"$base/groups/general"
+  val TnmGeneral = "TNM-General" at s"$base/groups/general"
+  val TnmPublic = "TNM-Public" at s"$base/groups/public"
 
   def publishSettings(repo: Repo) = Seq(
     publishMavenStyle := true,
