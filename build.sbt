@@ -4,7 +4,7 @@ sbtPlugin := true
 
 organization := "com.thenewmotion"
 name := "sbt-build-seed"
-version := "0.5.0"
+version := "0.5.1-SNAPSHOT"
 
 scalaVersion in Global := "2.10.4"
 
