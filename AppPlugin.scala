@@ -15,10 +15,10 @@ object AppPlugin extends AutoPlugin {
       publishArtifact in (Compile, packageSrc) := false
     ) ++
     Seq(
-      version := sys.props.getOrElse("application.version", 
-        sys.env.getOrElse("application.version", "0.1-SNAPSHOT"))
+      version := sys.props.getOrElse("application.version",
+        sys.env.getOrElse("application.version", version.value))
     )
-    
+
   override lazy val projectSettings =
     publishSettings
 
