@@ -21,7 +21,7 @@ Add following to `project/plugins.sbt`
 ```
 resolvers += "TNM" at "http://nexus.thenewmotion.com/content/groups/public"
 
-addSbtPlugin("com.thenewmotion" % "sbt-build-seed" % "0.6.1" )
+addSbtPlugin("com.thenewmotion" % "sbt-build-seed" % "0.6.2" )
 ```
 
 For library use:
