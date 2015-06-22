@@ -1,7 +1,7 @@
 package tnm
 
 import sbt._, Keys._
-import sbtrelease.ReleasePlugin.ReleaseKeys._
+import sbtrelease.ReleasePlugin.autoImport.releaseCrossBuild
 
 object LibPlugin extends AutoPlugin {
 
@@ -12,7 +12,7 @@ object LibPlugin extends AutoPlugin {
   )
 
   val releaseSettings = Seq(
-    crossBuild := true
+    releaseCrossBuild := true
   )
 
   override lazy val projectSettings =

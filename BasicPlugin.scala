@@ -1,9 +1,12 @@
 package tnm
 
 import sbt._, Keys._
-
+import sbtrelease.ReleasePlugin
+import aether.AetherPlugin
 
 object BasicPlugin extends AutoPlugin {
+
+  Logging.initFactory()
 
   val shellSettings = Seq(
     shellPrompt := Shell.prompt
@@ -12,7 +15,7 @@ object BasicPlugin extends AutoPlugin {
   val compilerSettings = Seq(
     scalaVersion := ScalaVersion.curr,
     resolvers := Seq(Repo.TnmGeneral),
-    javacOptions ++= Seq(
+    javacOptions := Seq(
       "-source", "1.7",
       "-target", "1.7"
     ),
@@ -29,13 +32,23 @@ object BasicPlugin extends AutoPlugin {
   )
 
   val publishSettings =
-    Repo.publishSettings(Repo.Private) ++
-    sbtrelease.ReleasePlugin.releaseSettings ++
-    aether.Aether.aetherPublishSettings
+    aether.AetherPlugin.autoImport.overridePublishBothSettings ++
+    Repo.publishSettings(Repo.Private)
 
   override lazy val projectSettings =
     shellSettings ++
     compilerSettings ++
     publishSettings
 
+  override val requires = ReleasePlugin && AetherPlugin
+}
+
+private[tnm] object Logging {
+  def initFactory() {
+    def cls(fqn: String) = this.getClass.getClassLoader.loadClass(fqn)
+
+    cls("org.slf4j.LoggerFactory")
+    .getMethod("getLogger", cls("java.lang.String"))
+    .invoke(/*since it's a static method*/ null, "ROOT")
+  }
 }

@@ -36,13 +36,5 @@ val ossLibModule = project.in(file("oss-lib-module"))
   .enablePlugins(OssLibPlugin)
 ```
 
-However, application settings appliance has one caveat atm. 
-You must explicitly set publish settings as in following snippet
-```
-val appModule = project.in(file("app-module"))
-  .enablePlugins(AppPlugin)
-  .settings(AppPlugin.publishSettings: _*)
-```
-
 ### Maintainer ###
 m.fedorov@thenewmotion.com

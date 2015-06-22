@@ -16,8 +16,8 @@ libraryDependencies ++=
   Seq(
     "org.scala-sbt" % "sbt" % "0.13.8") ++
   Seq(
-    "com.github.gseitz" % "sbt-release" % "0.8.5",
-    "no.arktekk.sbt" % "aether-deploy" % "0.11"
+    "com.github.gseitz" % "sbt-release" % "1.0.0",
+    "no.arktekk.sbt" % "aether-deploy" % "0.14"
   ).map(
     sbtPluginExtra(_, "0.13", "2.10")
   )
