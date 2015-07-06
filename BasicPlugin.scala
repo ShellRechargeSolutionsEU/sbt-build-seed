@@ -14,10 +14,14 @@ object BasicPlugin extends AutoPlugin {
 
   val compilerSettings = Seq(
     scalaVersion := ScalaVersion.curr,
+    ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) },
     resolvers := Seq(Repo.TnmGeneral),
     javacOptions := Seq(
       "-source", "1.7",
       "-target", "1.7"
+    ),
+    javacOptions in doc := Seq(
+      "-source", "1.7"
     ),
     scalacOptions := Seq(
       "-encoding", "UTF-8",

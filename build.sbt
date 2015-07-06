@@ -1,5 +1,4 @@
 import Defaults._
-import sbtrelease.ReleasePlugin.ReleaseKeys.crossBuild
 
 sbtPlugin := true
 enablePlugins(LibPlugin)
@@ -8,7 +7,7 @@ organization := "com.thenewmotion"
 name := "sbt-build-seed"
 
 scalaVersion := tnm.ScalaVersion.prev
-crossBuild := false
+releaseCrossBuild := false
 
 tnm.Repo.publishSettings(tnm.Repo.Public)
 
