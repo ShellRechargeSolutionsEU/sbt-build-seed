@@ -4,6 +4,7 @@ import sbt._, Keys._
 import sbtrelease.ReleasePlugin
 import aether.AetherPlugin
 
+
 object BasicPlugin extends AutoPlugin {
 
   Logging.initFactory()
@@ -31,8 +32,14 @@ object BasicPlugin extends AutoPlugin {
       "-Xlog-reflective-calls",
       "-target:jvm-1.7"
     ),
-    parallelExecution in Compile := true,
-    fork in Test := true
+    parallelExecution in Compile := true
+  )
+
+  val miscSettings = Seq(
+    cancelable in Global := true,
+    parallelExecution in Test := true,
+    fork in Test := true,
+    fork in run := true
   )
 
   val publishSettings =
@@ -42,7 +49,8 @@ object BasicPlugin extends AutoPlugin {
   override lazy val projectSettings =
     shellSettings ++
     compilerSettings ++
-    publishSettings
+    publishSettings ++
+    miscSettings
 
   override val requires = ReleasePlugin && AetherPlugin
 }
