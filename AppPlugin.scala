@@ -10,6 +10,7 @@ object AppPlugin extends AutoPlugin {
   lazy val publishSettings =
     Seq(
       crossPaths := false,
+      crossScalaVersions := Seq(tnm.ScalaVersion.curr),
       publishArtifact in (Compile, packageDoc) := false,
       publishArtifact in (Compile, packageSrc) := false
     ) ++
