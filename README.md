@@ -7,34 +7,35 @@ Adds default settings for 3 kinds of builds
 - Application
 
 
-### For best experience before using it perform following ###
-Install [alternative script for sbt](https://github.com/paulp/sbt-extras) 
-
-Setup usage of latest SBT available with 
-
-```alias sbt="sbt -sbt-force-latest"``` 
-
-
-### How to use it in build? ###
+### How to use? ###
 
 Add following to `project/plugins.sbt`
 ```
 resolvers += "TNM" at "http://nexus.thenewmotion.com/content/groups/public"
 
-addSbtPlugin("com.thenewmotion" % "sbt-build-seed" % "0.9.3")
+addSbtPlugin("com.thenewmotion" % "sbt-build-seed" % "1.0.0")
 ```
 
-For library use:
+To develop a library in your build.sbt use:
 ```
-val libModule = project.in(file("lib-module"))
-  .enablePlugins(LibPlugin)
+enablePlugins(LibPlugin)
 ```
 
-For OSS library use:
+To develop an OSS library in your build.sbt use:
 ```
-val ossLibModule = project.in(file("oss-lib-module"))
-  .enablePlugins(OssLibPlugin)
+enablePlugins(OssLibPlugin)
 ```
+
+To develop an application in your build.sbt use:
+```
+enablePlugins(AppPlugin)
+```
+
+
+### Compatibility ###
+Since plugin version `1.0.0` minimum required Java version is 8.
+If Java 7 support is needed use version `0.9.3`
+
 
 ### Maintainer ###
 m.fedorov@thenewmotion.com
