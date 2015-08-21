@@ -19,7 +19,24 @@ object AppPlugin extends AutoPlugin {
         sys.env.getOrElse("application.version", version.value))
     )
 
+  lazy val devConfigSettings = {
+    def customOpts(dir: File) = {
+      Seq(
+        "logback.configurationFile" -> dir / "logback.xml",
+        "config.file" -> dir / "application.conf"
+      ).collect {
+        case (key, file) if file.exists => s"-D$key=$file"
+      }
+    }
+
+    Seq(
+      javaOptions in run := customOpts(baseDirectory.value / "dev" / "main"),
+      javaOptions in Test := customOpts(baseDirectory.value / "dev" / "test")
+    )
+  }
+
   override lazy val projectSettings =
-    publishSettings
+    publishSettings ++
+    devConfigSettings
 
 }
