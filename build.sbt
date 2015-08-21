@@ -13,7 +13,7 @@ tnm.Repo.publishSettings(tnm.Repo.Public)
 
 libraryDependencies ++=
   Seq(
-    "org.scala-sbt" % "sbt" % "0.13.8") ++
+    "org.scala-sbt" % "sbt" % "0.13.9") ++
   Seq(
     "com.github.gseitz" % "sbt-release" % "1.0.0",
     "no.arktekk.sbt" % "aether-deploy" % "0.14"
