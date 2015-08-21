@@ -34,7 +34,14 @@ object BasicPlugin extends AutoPlugin {
       "-deprecation",
       "-feature",
       "-Xlog-reflective-calls",
-      "-target:jvm-1.8"
+      "-Xlint"
+    ) ++ (
+      if (scalaVersion.value == ScalaVersion.curr)
+        Seq(
+          "-Ywarn-unused-import",
+          "-target:jvm-1.8")
+      else
+        Seq()
     ),
     parallelExecution in Compile := true
   )
