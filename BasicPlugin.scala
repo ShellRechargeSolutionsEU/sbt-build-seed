@@ -9,20 +9,24 @@ object BasicPlugin extends AutoPlugin {
 
   Logging.initFactory()
 
+  require(
+    sys.props("java.specification.version").toDouble > 1.7,
+    "Java 8 is required to build this project")
+
   val shellSettings = Seq(
     shellPrompt := Shell.prompt
   )
 
   val compilerSettings = Seq(
+    resolvers := Seq(Repo.TnmGeneral),
     scalaVersion := ScalaVersion.curr,
     ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) },
-    resolvers := Seq(Repo.TnmGeneral),
     javacOptions := Seq(
-      "-source", "1.7",
-      "-target", "1.7"
+      "-source", "1.8",
+      "-target", "1.8"
     ),
     javacOptions in doc := Seq(
-      "-source", "1.7"
+      "-source", "1.8"
     ),
     scalacOptions := Seq(
       "-encoding", "UTF-8",
@@ -30,7 +34,7 @@ object BasicPlugin extends AutoPlugin {
       "-deprecation",
       "-feature",
       "-Xlog-reflective-calls",
-      "-target:jvm-1.7"
+      "-target:jvm-1.8"
     ),
     parallelExecution in Compile := true
   )
