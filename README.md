@@ -13,7 +13,7 @@ Add following to `project/plugins.sbt`
 ```
 resolvers += "TNM" at "http://nexus.thenewmotion.com/content/groups/public"
 
-addSbtPlugin("com.thenewmotion" % "sbt-build-seed" % "1.1.0")
+addSbtPlugin("com.thenewmotion" % "sbt-build-seed" % "1.1.1")
 ```
 
 To develop a library in your build.sbt use:
