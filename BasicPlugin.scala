@@ -43,6 +43,7 @@ object BasicPlugin extends AutoPlugin {
       else
         Seq()
     ),
+    scalacOptions in console -= "-Ywarn-unused-import",
     parallelExecution in Compile := true
   )
 
