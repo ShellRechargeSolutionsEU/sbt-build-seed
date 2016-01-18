@@ -2,7 +2,7 @@ package tnm
 
 import sbt._, Keys._
 import sbtrelease.ReleasePlugin
-import aether.AetherPlugin
+import aether._, AetherKeys.aetherArtifact
 
 
 object BasicPlugin extends AutoPlugin {
@@ -56,7 +56,13 @@ object BasicPlugin extends AutoPlugin {
 
   val publishSettings =
     aether.AetherPlugin.autoImport.overridePublishBothSettings ++
-    Repo.publishSettings(Repo.Private)
+    Repo.publishSettings(Repo.Private) ++
+    Seq(
+      aetherArtifact := {
+        val deduped = aetherArtifact.value.subartifacts.distinct
+        aetherArtifact.value.copy(subartifacts = deduped)
+      }
+    )
 
   override lazy val projectSettings =
     shellSettings ++
