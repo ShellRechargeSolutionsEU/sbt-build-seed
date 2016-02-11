@@ -32,9 +32,17 @@ enablePlugins(AppPlugin)
 ```
 
 
-### Compatibility ###
-Since plugin version `1.0.0` minimum required Java version is 8.
-If Java 7 support is needed use version `0.9.3`
+### Requirements ###
+Releases `>= 1.1.1` 
+
+- sbt  `0.13.9`
+
+Releases `>= 1.0.0` 
+
+- Java 8
+
+
+For Java 7 support use release `0.9.3`.
 
 
 ### Maintainer ###
