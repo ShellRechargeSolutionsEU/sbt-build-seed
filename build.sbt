@@ -1,7 +1,7 @@
 import Defaults._
 
 sbtPlugin := true
-enablePlugins(LibPlugin)
+enablePlugins(OssLibPlugin)
 
 organization := "com.thenewmotion"
 name := "sbt-build-seed"
@@ -9,13 +9,12 @@ name := "sbt-build-seed"
 scalaVersion := tnm.ScalaVersion.prev
 releaseCrossBuild := false
 
-tnm.Repo.publishSettings(tnm.Repo.Public)
 
 libraryDependencies ++=
   Seq(
-    "org.scala-sbt" % "sbt" % "0.13.9") ++
+    "org.scala-sbt" % "sbt" % "0.13.11") ++
   Seq(
-    "com.github.gseitz" % "sbt-release" % "1.0.0",
+    "com.github.gseitz" % "sbt-release" % "1.0.2",
     "no.arktekk.sbt" % "aether-deploy" % "0.16"
   ).map(
     sbtPluginExtra(_, "0.13", "2.10")
