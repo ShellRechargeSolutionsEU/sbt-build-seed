@@ -13,7 +13,7 @@ Add following to `project/plugins.sbt`
 ```
 resolvers += "TNM" at "http://nexus.thenewmotion.com/content/groups/public"
 
-addSbtPlugin("com.thenewmotion" % "sbt-build-seed" % "1.2.1")
+addSbtPlugin("com.thenewmotion" % "sbt-build-seed" % "1.4.0")
 ```
 
 To develop a library in your build.sbt use:
@@ -31,11 +31,17 @@ To develop an application in your build.sbt use:
 enablePlugins(AppPlugin)
 ```
 
+### Recommendations ###
+Instead of standard sbt launcher use [sbt-extras](https://github.com/paulp/) and add following alias to your shell init script
+
+`alias sbt="sbt -sbt-force-latest"`
+
+If you keep updating sbt-extras you'll always have up-to-date sbt at your disposal.
 
 ### Requirements ###
 Releases `>= 1.1.1` 
 
-- sbt  `0.13.9`
+- sbt  `>= 0.13.9`
 
 Releases `>= 1.0.0` 
 
