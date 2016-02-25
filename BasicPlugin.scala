@@ -7,8 +7,6 @@ import aether._, AetherKeys.aetherArtifact
 
 object BasicPlugin extends AutoPlugin {
 
-  Logging.initFactory()
-
   require(
     sys.props("java.specification.version").toDouble > 1.7,
     "Java 8 is required to build this project")
@@ -71,14 +69,4 @@ object BasicPlugin extends AutoPlugin {
     miscSettings
 
   override val requires = ReleasePlugin && AetherPlugin
-}
-
-private[tnm] object Logging {
-  def initFactory() {
-    def cls(fqn: String) = this.getClass.getClassLoader.loadClass(fqn)
-
-    cls("org.slf4j.LoggerFactory")
-    .getMethod("getLogger", cls("java.lang.String"))
-    .invoke(/*since it's a static method*/ null, "ROOT")
-  }
 }
