@@ -54,13 +54,7 @@ object BasicPlugin extends AutoPlugin {
 
   val publishSettings =
     aether.AetherPlugin.autoImport.overridePublishBothSettings ++
-    Repo.publishSettings(Repo.Private) ++
-    Seq(
-      aetherArtifact := {
-        val deduped = aetherArtifact.value.subartifacts.distinct
-        aetherArtifact.value.copy(subartifacts = deduped)
-      }
-    )
+    Repo.publishSettings(Repo.Private)
 
   override lazy val projectSettings =
     shellSettings ++
