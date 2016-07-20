@@ -50,7 +50,7 @@ object BasicPlugin extends AutoPlugin {
     val required = Project.extract(s).get(javaVersion).toDouble
     val installed = sys.props("java.specification.version").toDouble
     require(
-      installed > required,
+      installed >= required,
       s"At least Java $required is required to build this project")
     s
   }
