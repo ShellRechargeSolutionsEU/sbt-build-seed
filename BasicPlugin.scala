@@ -7,9 +7,14 @@ import aether._, AetherKeys.aetherArtifact
 
 object BasicPlugin extends AutoPlugin {
 
-  require(
-    sys.props("java.specification.version").toDouble > 1.7,
-    "Java 8 is required to build this project")
+  val defaultJavaVersion = "1.8"
+
+  object autoImport {
+    val javaVersion = SettingKey[String](
+      "java-version", "Source compilation and target Java version")
+  }
+
+  import autoImport._
 
   val shellSettings = Seq(
     shellPrompt := Shell.prompt
@@ -19,12 +24,13 @@ object BasicPlugin extends AutoPlugin {
     resolvers := Seq(Repo.TnmGeneral),
     scalaVersion := ScalaVersion.curr,
     ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) },
+    javaVersion := defaultJavaVersion,
     javacOptions := Seq(
-      "-source", "1.8",
-      "-target", "1.8"
+      "-source", javaVersion.value,
+      "-target", javaVersion.value
     ),
     javacOptions in doc := Seq(
-      "-source", "1.8"
+      "-source", javaVersion.value
     ),
     scalacOptions := Seq(
       "-encoding", "UTF-8",
@@ -33,23 +39,29 @@ object BasicPlugin extends AutoPlugin {
       "-feature",
       "-Xlog-reflective-calls",
       "-Xlint"
-    ) ++ (
-      if (scalaVersion.value == ScalaVersion.curr)
-        Seq(
-          "-Ywarn-unused-import",
-          "-target:jvm-1.8")
-      else
-        Seq()
-    ),
+    ) ++
+    Seq("-Ywarn-unused-import").filter(_ => scalaVersion.value == ScalaVersion.curr) ++
+    Seq("-target:jvm-" + javaVersion.value),
     scalacOptions in console -= "-Ywarn-unused-import",
     parallelExecution in Compile := true
   )
+
+  val checkJavaVersionCompliance = (s: State) => {
+    val required = Project.extract(s).get(javaVersion).toDouble
+    val installed = sys.props("java.specification.version").toDouble
+    require(
+      installed > required,
+      s"At least Java $required is required to build this project")
+    s
+  }
 
   val miscSettings = Seq(
     cancelable in Global := true,
     parallelExecution in Test := true,
     fork in Test := true,
-    fork in run := true
+    fork in run := true,
+    onLoad in Global :=
+      checkJavaVersionCompliance compose (onLoad in Global).value
   )
 
   val publishSettings =
