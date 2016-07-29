@@ -47,8 +47,10 @@ Releases `>= 1.0.0`
 
 - Java 8
 
-
-For Java 7 support use release `0.9.3`.
+Since release `1.8.0` Java 8 support is optional. For Java 7 support use setting 
+```
+javaVersion := "1.7"
+```
 
 
 ### Maintainer ###
