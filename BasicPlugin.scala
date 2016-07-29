@@ -40,8 +40,8 @@ object BasicPlugin extends AutoPlugin {
       "-Xlog-reflective-calls",
       "-Xlint"
     ) ++
-    Seq("-Ywarn-unused-import").filter(_ => scalaVersion.value == ScalaVersion.curr) ++
-    Seq("-target:jvm-" + javaVersion.value),
+    Seq("-Ywarn-unused-import", "-target:jvm-" + javaVersion.value)
+      .filter(_ => scalaVersion.value == ScalaVersion.curr),
     scalacOptions in console -= "-Ywarn-unused-import",
     parallelExecution in Compile := true
   )
