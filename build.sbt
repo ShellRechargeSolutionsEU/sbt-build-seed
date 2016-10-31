@@ -12,7 +12,7 @@ releaseCrossBuild := false
 
 libraryDependencies ++=
   Seq(
-    "org.scala-sbt" % "sbt" % "0.13.11") ++
+    "org.scala-sbt" % "sbt" % "0.13.13") ++
   Seq(
     "com.github.gseitz" % "sbt-release" % "1.0.3",
     "no.arktekk.sbt" % "aether-deploy" % "0.17"
