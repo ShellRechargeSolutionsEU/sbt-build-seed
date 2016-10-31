@@ -7,14 +7,7 @@ import aether._, AetherKeys.aetherArtifact
 
 object BasicPlugin extends AutoPlugin {
 
-  val defaultJavaVersion = "1.8"
-
-  object autoImport {
-    val javaVersion = SettingKey[String](
-      "java-version", "Source compilation and target Java version")
-  }
-
-  import autoImport._
+  private val javaVersion = "1.8"
 
   val shellSettings = Seq(
     shellPrompt := Shell.prompt
@@ -23,13 +16,12 @@ object BasicPlugin extends AutoPlugin {
   val compilerSettings = Seq(
     resolvers := Seq(Repo.TnmGeneral),
     scalaVersion := ScalaVersion.curr,
-    javaVersion := defaultJavaVersion,
     javacOptions := Seq(
-      "-source", javaVersion.value,
-      "-target", javaVersion.value
+      "-source", javaVersion,
+      "-target", javaVersion
     ),
     javacOptions in doc := Seq(
-      "-source", javaVersion.value
+      "-source", javaVersion
     ),
     scalacOptions := Seq(
       "-encoding", "UTF-8",
@@ -39,18 +31,16 @@ object BasicPlugin extends AutoPlugin {
       "-Xlog-reflective-calls",
       "-Xlint"
     ) ++
-    Seq("-Ywarn-unused-import", "-target:jvm-" + javaVersion.value)
-      .filter(_ => scalaVersion.value == ScalaVersion.curr),
+    Seq("-Ywarn-unused-import", "-target:jvm-$javaVersion"),
     scalacOptions in console -= "-Ywarn-unused-import",
     parallelExecution in Compile := true
   )
 
   val checkJavaVersionCompliance = (s: State) => {
-    val required = Project.extract(s).get(javaVersion).toDouble
     val installed = sys.props("java.specification.version").toDouble
     require(
-      installed >= required,
-      s"At least Java $required is required to build this project")
+      installed >= javaVersion.toDouble,
+      s"Java $javaVersion is required to build this project")
     s
   }
 

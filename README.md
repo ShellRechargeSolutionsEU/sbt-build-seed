@@ -13,7 +13,7 @@ Add following to `project/plugins.sbt`
 ```
 resolvers += "TNM" at "http://nexus.thenewmotion.com/content/groups/public"
 
-addSbtPlugin("com.thenewmotion" % "sbt-build-seed" % "1.8.2")
+addSbtPlugin("com.thenewmotion" % "sbt-build-seed" % "2.0.0")
 ```
 
 To develop a library in your build.sbt use:
@@ -39,6 +39,11 @@ Instead of standard sbt launcher use [sbt-extras](https://github.com/paulp/) and
 If you keep updating sbt-extras you'll always have up-to-date sbt at your disposal.
 
 ### Requirements ###
+
+Releases `2.X.X`
+- Java 8
+- sbt `>= 0.13.13`
+
 Releases `>= 1.1.1` 
 
 - sbt  `>= 0.13.9`
@@ -47,7 +52,7 @@ Releases `>= 1.0.0`
 
 - Java 8
 
-Since release `1.8.0` Java 8 support is optional. For Java 7 support use setting 
+Since release `1.8.0` and before `2.0.0` Java 8 support is optional. For Java 7 support use setting 
 ```
 javaVersion := "1.7"
 ```
