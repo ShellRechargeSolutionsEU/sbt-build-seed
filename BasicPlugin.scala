@@ -23,7 +23,6 @@ object BasicPlugin extends AutoPlugin {
   val compilerSettings = Seq(
     resolvers := Seq(Repo.TnmGeneral),
     scalaVersion := ScalaVersion.curr,
-    ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) },
     javaVersion := defaultJavaVersion,
     javacOptions := Seq(
       "-source", javaVersion.value,
