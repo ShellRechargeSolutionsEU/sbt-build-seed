@@ -29,9 +29,10 @@ object BasicPlugin extends AutoPlugin {
       "-deprecation",
       "-feature",
       "-Xlog-reflective-calls",
-      "-Xlint"
-    ) ++
-    Seq("-Ywarn-unused-import", "-target:jvm-$javaVersion"),
+      "-Xlint",
+      "-Ywarn-unused-import",
+      s"-target:jvm-$javaVersion"
+    ),
     scalacOptions in console -= "-Ywarn-unused-import",
     parallelExecution in Compile := true
   )
