@@ -31,6 +31,7 @@ object BasicPlugin extends AutoPlugin {
       "-Xlog-reflective-calls",
       "-Xlint",
       "-Ywarn-unused-import",
+      "-Ywarn-value-discard",
       s"-target:jvm-$javaVersion"
     ),
     scalacOptions in console -= "-Ywarn-unused-import",
