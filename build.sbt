@@ -3,7 +3,7 @@ import Defaults._
 sbtPlugin := true
 enablePlugins(OssLibPlugin)
 
-organization := "com.thenewmotion"
+organization := "com.newmotion"
 name := "sbt-build-seed"
 
 scalaVersion := tnm.ScalaVersion.prev
