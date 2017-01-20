@@ -59,4 +59,4 @@ javaVersion := "1.7"
 
 
 ### Maintainer ###
-m.fedorov@thenewmotion.com
+m.fedorov@newmotion.com
