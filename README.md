@@ -57,6 +57,9 @@ Since release `1.8.0` and before `2.0.0` Java 8 support is optional. For Java 7 
 javaVersion := "1.7"
 ```
 
+### Additional information ###
+This tool does not provide default values for the `name` and the `organization`, which are required by sbt to publish to the
+right path with the right name.
 
 ### Maintainer ###
 m.fedorov@newmotion.com
