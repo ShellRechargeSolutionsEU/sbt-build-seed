@@ -60,6 +60,3 @@ javaVersion := "1.7"
 ### Additional information ###
 This tool does not provide default values for the `name` and the `organization`, which are required by sbt to publish to the
 right path with the right name.
-
-### Maintainer ###
-m.fedorov@newmotion.com
