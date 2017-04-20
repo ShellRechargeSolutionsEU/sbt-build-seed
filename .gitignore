@@ -1,0 +1,43 @@
+# Maven
+target
+git.props
+distribution/buildNumber.properties
+distribution/assembly-include
+
+#JRebel
+rebel.xml
+
+# Idea
+.idea/
+*.iml
+*.ipr
+*.iws
+.buildpath
+*.ids
+atlassian-ide-plugin.xml
+
+# Eclipse
+.project
+.classpath
+.settings
+.scala_dependencies
+
+# Emacs
+*~
+*#
+.#*
+.ensime
+.ensime_lucene
+TAGS
+
+# Scala
+*.sc
+
+# Mac
+.DS_Store
+
+# Vim
+.*.swp
+
+# Jenv
+.java-version
