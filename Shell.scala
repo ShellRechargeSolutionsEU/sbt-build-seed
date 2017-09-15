@@ -10,7 +10,7 @@ object Shell {
     val project = decorate(Project.extract(s).get(Keys.name), BOLD)
     val branch =
       Try {
-        val branch = "git rev-parse --abbrev-ref HEAD".!!.trim
+        val branch = scala.sys.process.Process("git rev-parse --abbrev-ref HEAD").!!.trim
         " ["+decorate(branch, GREEN)+"]"
       } getOrElse ""
 
