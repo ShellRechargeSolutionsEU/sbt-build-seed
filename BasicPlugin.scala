@@ -2,8 +2,7 @@ package tnm
 
 import sbt._, Keys._
 import sbtrelease.ReleasePlugin
-import aether._, AetherKeys.aetherArtifact
-
+import aether._
 
 object BasicPlugin extends AutoPlugin {
 
