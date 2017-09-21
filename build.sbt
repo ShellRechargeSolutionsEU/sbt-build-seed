@@ -1,4 +1,5 @@
 import Defaults._
+import aether.AetherKeys.aetherCoordinates
 
 sbtPlugin := true
 enablePlugins(OssLibPlugin)
@@ -6,7 +7,7 @@ enablePlugins(OssLibPlugin)
 organization := "com.newmotion"
 name := "sbt-build-seed"
 
-crossSbtVersions := Vector("0.13.16", "1.0.1")
+crossSbtVersions := Vector("0.13.16", "1.0.2")
 releaseCrossBuild := false
 
 libraryDependencies ++= {
@@ -28,6 +29,28 @@ scalacOptions --= {
         "-Ywarn-unused-import",
         s"-target:jvm-1.8"
       )
-    case v => Nil
+    case _ => Nil
   }
 }
+
+aetherCoordinates := {
+  if (sbtPlugin.value)
+    aetherCoordinates.value.withSbtVersion((sbtBinaryVersion in pluginCrossBuild).value).withScalaVersion(scalaBinaryVersion.value)
+  else
+    aetherCoordinates.value
+}
+
+import ReleaseTransformations._
+releaseProcess := Seq[ReleaseStep](
+  checkSnapshotDependencies,
+  inquireVersions,
+  runClean,
+  releaseStepCommandAndRemaining("^ test"),
+  setReleaseVersion,
+  commitReleaseVersion,
+  tagRelease,
+  releaseStepCommandAndRemaining("^ publishSigned"),
+  setNextVersion,
+  commitNextVersion,
+  pushChanges
+)
