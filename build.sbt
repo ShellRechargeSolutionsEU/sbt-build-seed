@@ -16,7 +16,7 @@ libraryDependencies ++= {
 
   Seq(
     "com.github.gseitz" % "sbt-release" % "1.0.6",
-    "no.arktekk.sbt" % "aether-deploy" % "0.20.0"
+    "no.arktekk.sbt" % "aether-deploy" % "0.21"
   ).map(
     sbtPluginExtra(_, sbtV, scalaV)
   )
@@ -31,13 +31,6 @@ scalacOptions --= {
       )
     case _ => Nil
   }
-}
-
-aetherCoordinates := {
-  if (sbtPlugin.value)
-    aetherCoordinates.value.withSbtVersion((sbtBinaryVersion in pluginCrossBuild).value).withScalaVersion(scalaBinaryVersion.value)
-  else
-    aetherCoordinates.value
 }
 
 import ReleaseTransformations._
