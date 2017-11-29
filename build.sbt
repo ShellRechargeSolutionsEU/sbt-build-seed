@@ -7,7 +7,7 @@ enablePlugins(OssLibPlugin)
 organization := "com.newmotion"
 name := "sbt-build-seed"
 
-crossSbtVersions := Vector("0.13.16", "1.0.2")
+crossSbtVersions := Vector("0.13.16", "1.0.4")
 releaseCrossBuild := false
 
 libraryDependencies ++= {
