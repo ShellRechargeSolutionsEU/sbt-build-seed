@@ -15,7 +15,7 @@ libraryDependencies ++= {
   val scalaV = (scalaBinaryVersion in pluginCrossBuild).value
 
   Seq(
-    "com.github.gseitz" % "sbt-release" % "1.0.6",
+    "com.github.gseitz" % "sbt-release" % "1.0.8",
     "no.arktekk.sbt" % "aether-deploy" % "0.21",
     "org.lyranthe.sbt" % "partial-unification" % "1.1.0"
   ).map(
