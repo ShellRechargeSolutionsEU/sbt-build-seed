@@ -6,6 +6,10 @@ Adds default settings for 3 kinds of builds
 - OSS Library
 - Application
 
+### NOTE ###
+
+Due to an update to our nexus repository one needs to update to a version > 4.1.3
+if you are using (or want to use) other New Motion libraries in you project
 
 ### How to use? ###
 
@@ -13,7 +17,7 @@ Add following to `project/plugins.sbt`
 ```
 resolvers += "TNM" at "http://nexus.thenewmotion.com/content/groups/public"
 
-addSbtPlugin("com.newmotion" % "sbt-build-seed" % "4.0.6")
+addSbtPlugin("com.newmotion" % "sbt-build-seed" % "4.1.3")
 ```
 
 To develop a library in your build.sbt use:
