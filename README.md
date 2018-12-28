@@ -15,7 +15,7 @@ if you are using (or want to use) other New Motion libraries in you project
 
 Add following to `project/plugins.sbt`
 ```
-resolvers += "TNM" at "http://nexus.thenewmotion.com/content/groups/public"
+resolvers += "TNM" at "https://nexus.thenewmotion.com/content/groups/public"
 
 addSbtPlugin("com.newmotion" % "sbt-build-seed" % "4.1.3")
 ```
