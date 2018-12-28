@@ -13,7 +13,7 @@ sealed trait Repo {
 }
 
 object Repo {
-  private val base = "http://nexus.thenewmotion.com/content"
+  private val base = "https://nexus.thenewmotion.com/content"
 
   object Private extends Repo {
     override val snapshots = "snapshots"
