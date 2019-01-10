@@ -15,24 +15,25 @@ object BasicPlugin extends AutoPlugin {
   val compilerSettings = Seq(
     resolvers := Seq(Repo.TnmGeneral),
     scalaVersion := ScalaVersion.curr,
-    javacOptions := Seq(
+    javacOptions ++= Seq(
       "-source", javaVersion,
       "-target", javaVersion
     ),
-    javacOptions in doc := Seq(
+    javacOptions in doc ++= Seq(
       "-source", javaVersion
     ),
-    scalacOptions := Seq(
+    scalacOptions ++= Seq(
       "-encoding", "UTF-8",
       "-unchecked",
       "-deprecation",
       "-feature",
       "-Xlog-reflective-calls",
       "-Xlint",
-      "-Ywarn-unused-import",
-      "-Ywarn-value-discard",
-      s"-target:jvm-$javaVersion"
-    ),
+      "-Ywarn-value-discard"
+    ) ++ ((scalaBinaryVersion in pluginCrossBuild).value match {
+      case v if v == "2.10" => Seq.empty
+      case _ => Seq("-Ywarn-unused-import", s"-target:jvm-$javaVersion")
+    }),
     scalacOptions in console -= "-Ywarn-unused-import",
     parallelExecution in Compile := true
   )

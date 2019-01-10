@@ -7,7 +7,7 @@ enablePlugins(OssLibPlugin)
 organization := "com.newmotion"
 name := "sbt-build-seed"
 
-crossSbtVersions := Vector("0.13.17", "1.2.7")
+crossSbtVersions := Vector("0.13.17", "1.2.8")
 releaseCrossBuild := false
 
 libraryDependencies ++= {
@@ -21,17 +21,6 @@ libraryDependencies ++= {
   ).map(
     sbtPluginExtra(_, sbtV, scalaV)
   )
-}
-
-scalacOptions --= {
-  (scalaBinaryVersion in pluginCrossBuild).value match {
-    case v if v == "2.10" =>
-      Seq(
-        "-Ywarn-unused-import",
-        s"-target:jvm-1.8"
-      )
-    case _ => Nil
-  }
 }
 
 import ReleaseTransformations._
