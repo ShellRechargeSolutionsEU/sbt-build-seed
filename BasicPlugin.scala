@@ -32,7 +32,8 @@ object BasicPlugin extends AutoPlugin {
       "-Ywarn-value-discard"
     ) ++ ((scalaBinaryVersion in pluginCrossBuild).value match {
       case v if v == "2.10" => Seq.empty
-      case _ => Seq("-Ywarn-unused-import", s"-target:jvm-$javaVersion")
+      case v if v == "2.12" => Seq("-Ywarn-unused-import", s"-target:jvm-$javaVersion")
+      case v if v == "2.13" => Seq("-Ywarn-unused:imports", s"-target:jvm-$javaVersion")
     }),
     scalacOptions in console -= "-Ywarn-unused-import",
     parallelExecution in Compile := true

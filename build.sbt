@@ -7,17 +7,18 @@ enablePlugins(OssLibPlugin)
 organization := "com.newmotion"
 name := "sbt-build-seed"
 
-crossSbtVersions := Vector("0.13.17", "1.2.8")
+crossSbtVersions := Vector("0.13.18", "1.2.8")
 releaseCrossBuild := false
+
+scalaVersion := tnm.ScalaVersion.prev
 
 libraryDependencies ++= {
   val sbtV = (sbtBinaryVersion in pluginCrossBuild).value
   val scalaV = (scalaBinaryVersion in pluginCrossBuild).value
 
   Seq(
-    "com.github.gseitz" % "sbt-release" % "1.0.9",
-    "no.arktekk.sbt" % "aether-deploy" % "0.21",
-    "org.lyranthe.sbt" % "partial-unification" % "1.1.2"
+    "com.github.gseitz" % "sbt-release" % "1.0.11",
+    "no.arktekk.sbt" % "aether-deploy" % "0.21"
   ).map(
     sbtPluginExtra(_, sbtV, scalaV)
   )
