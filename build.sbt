@@ -7,7 +7,7 @@ enablePlugins(OssLibPlugin)
 organization := "com.newmotion"
 name := "sbt-build-seed"
 
-crossSbtVersions := Vector("0.13.18", "1.2.8")
+crossSbtVersions := Vector("0.13.18", "1.3.0")
 releaseCrossBuild := false
 
 scalaVersion := tnm.ScalaVersion.prev
