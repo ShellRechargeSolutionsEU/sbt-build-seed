@@ -12,6 +12,13 @@ object BasicPlugin extends AutoPlugin {
     shellPrompt := Shell.prompt
   )
 
+  lazy val scalacBackendOptions = Seq(
+    "-Ybackend-parallelism", sys.runtime.availableProcessors().toString, // Maximum worker threads for backend
+    "-Ybackend-worker-queue", "10" // Backend threads worker queue
+  )
+
+  lazy val scalacTargetJvm = s"-target:jvm-$javaVersion"
+
   val compilerSettings = Seq(
     resolvers := Seq(Repo.TnmGeneral),
     scalaVersion := ScalaVersion.curr,
@@ -31,8 +38,9 @@ object BasicPlugin extends AutoPlugin {
       "-Xlint",
       "-Ywarn-value-discard"
     ) ++ ((scalaBinaryVersion in pluginCrossBuild).value match {
-      case v if v == "2.11" || v == "2.12" => Seq("-Ywarn-unused-import", s"-target:jvm-$javaVersion")
-      case v if v == "2.13" => Seq("-Ywarn-unused:imports", s"-target:jvm-$javaVersion")
+      case "2.11" => Seq("-Ywarn-unused-import", scalacTargetJvm)
+      case "2.12" => Seq("-Ywarn-unused-import", scalacTargetJvm) ++ scalacBackendOptions
+      case "2.13" => Seq("-Ywarn-unused:imports", scalacTargetJvm) ++ scalacBackendOptions
       case _ => Seq.empty
     }),
     scalacOptions in console -= "-Ywarn-unused-import",
