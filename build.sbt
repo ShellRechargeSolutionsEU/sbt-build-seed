@@ -1,5 +1,4 @@
 import Defaults._
-import aether.AetherKeys.aetherCoordinates
 
 sbtPlugin := true
 enablePlugins(OssLibPlugin)
@@ -7,7 +6,7 @@ enablePlugins(OssLibPlugin)
 organization := "com.newmotion"
 name := "sbt-build-seed"
 
-crossSbtVersions := Vector("0.13.18", "1.3.0")
+crossSbtVersions := Vector("0.13.18", "1.3.13")
 releaseCrossBuild := false
 
 scalaVersion := tnm.ScalaVersion.prev
@@ -17,8 +16,8 @@ libraryDependencies ++= {
   val scalaV = (scalaBinaryVersion in pluginCrossBuild).value
 
   Seq(
-    "com.github.gseitz" % "sbt-release" % "1.0.11",
-    "no.arktekk.sbt" % "aether-deploy" % "0.21"
+    "com.github.gseitz" % "sbt-release" % "1.0.13",
+    "no.arktekk.sbt" % "aether-deploy" % "0.25.0"
   ).map(
     sbtPluginExtra(_, sbtV, scalaV)
   )
