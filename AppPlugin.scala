@@ -30,8 +30,8 @@ object AppPlugin extends AutoPlugin {
     }
 
     Seq(
-      javaOptions in run := customOpts(baseDirectory.value / "dev" / "main"),
-      javaOptions in Test := customOpts(baseDirectory.value / "dev" / "test")
+      javaOptions in run ++= customOpts(baseDirectory.value / "dev" / "main"),
+      javaOptions in Test ++= customOpts(baseDirectory.value / "dev" / "test")
     )
   }
 
