@@ -19,7 +19,7 @@ object BasicPlugin extends AutoPlugin {
       "-source", javaVersion,
       "-target", javaVersion
     ),
-    javacOptions in doc ++= Seq(
+    doc / javacOptions ++= Seq(
       "-source", javaVersion
     ),
     scalacOptions ++= Seq(
@@ -30,13 +30,13 @@ object BasicPlugin extends AutoPlugin {
       "-Xlog-reflective-calls",
       "-Xlint",
       "-Ywarn-value-discard"
-    ) ++ ((scalaBinaryVersion in pluginCrossBuild).value match {
+    ) ++ ((pluginCrossBuild / scalaBinaryVersion).value match {
       case v if v == "2.11" || v == "2.12" => Seq("-Ywarn-unused-import", s"-target:jvm-$javaVersion")
       case v if v == "2.13" => Seq("-Ywarn-unused:imports", s"-target:jvm-$javaVersion")
       case _ => Seq.empty
     }),
-    scalacOptions in console -= "-Ywarn-unused-import",
-    parallelExecution in Compile := true
+    console / scalacOptions -= "-Ywarn-unused-import",
+    Compile / parallelExecution := true
   )
 
   val checkJavaVersionCompliance = (s: State) => {
@@ -48,12 +48,12 @@ object BasicPlugin extends AutoPlugin {
   }
 
   val miscSettings = Seq(
-    cancelable in Global := true,
-    parallelExecution in Test := true,
-    fork in Test := true,
-    fork in run := true,
-    onLoad in Global :=
-      checkJavaVersionCompliance compose (onLoad in Global).value
+    Global / cancelable := true,
+    Test / parallelExecution := true,
+    Test / fork := true,
+    run / fork := true,
+    Global / onLoad :=
+      checkJavaVersionCompliance compose (Global / onLoad).value
   )
 
   val publishSettings =

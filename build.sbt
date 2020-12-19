@@ -11,8 +11,8 @@ releaseCrossBuild := false
 scalaVersion := tnm.ScalaVersion.prev
 
 libraryDependencies ++= {
-  val sbtV = (sbtBinaryVersion in pluginCrossBuild).value
-  val scalaV = (scalaBinaryVersion in pluginCrossBuild).value
+  val sbtV = (pluginCrossBuild / sbtBinaryVersion).value
+  val scalaV = (pluginCrossBuild / scalaBinaryVersion).value
 
   Seq(
     "com.github.gseitz" % "sbt-release" % "1.0.13",
