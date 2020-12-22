@@ -11,8 +11,8 @@ object AppPlugin extends AutoPlugin {
     Seq(
       crossPaths := false,
       crossScalaVersions := Seq(scalaVersion.value),
-      publishArtifact in (Compile, packageDoc) := false,
-      publishArtifact in (Compile, packageSrc) := false
+      Compile / packageDoc / publishArtifact := false,
+      Compile / packageSrc / publishArtifact := false
     ) ++
     Seq(
       version := sys.props.getOrElse("application.version",
@@ -30,8 +30,8 @@ object AppPlugin extends AutoPlugin {
     }
 
     Seq(
-      javaOptions in run := customOpts(baseDirectory.value / "dev" / "main"),
-      javaOptions in Test := customOpts(baseDirectory.value / "dev" / "test")
+      run  / javaOptions ++= customOpts(baseDirectory.value / "dev" / "main"),
+      Test / javaOptions ++= customOpts(baseDirectory.value / "dev" / "test")
     )
   }
 
