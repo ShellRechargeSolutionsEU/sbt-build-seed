@@ -16,7 +16,7 @@ libraryDependencies ++= {
 
   Seq(
     "com.github.gseitz" % "sbt-release" % "1.0.13",
-    "no.arktekk.sbt" % "aether-deploy" % "0.25.0"
+    "no.arktekk.sbt" % "aether-deploy" % "0.26.0"
   ).map(
     sbtPluginExtra(_, sbtV, scalaV)
   )
